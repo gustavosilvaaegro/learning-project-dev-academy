@@ -1,4 +1,4 @@
-package com.aegro.demo.InterfaceAdpter.Repository;
+package com.aegro.demo.Domain.IRepository;
 
 import com.aegro.demo.InterfaceAdpter.Entities.Romaneio;
 import org.springframework.data.mongodb.repository.MongoRepository;

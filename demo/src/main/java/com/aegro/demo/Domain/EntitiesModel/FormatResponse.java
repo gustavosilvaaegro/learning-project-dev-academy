@@ -33,13 +33,13 @@ public class FormatResponse extends Throwable{
         String text = "";
 
 
-        if (candidates.length() > 0) {
+        if (!candidates.isEmpty()) {
             JSONObject firstCandidate = candidates.getJSONObject(0);
             JSONObject content = firstCandidate.getJSONObject("content");
             JSONArray parts = content.getJSONArray("parts");
 
 
-            if (parts.length() > 0) {
+            if (!parts.isEmpty()) {
                 JSONObject firstPart = parts.getJSONObject(0);
                 text = firstPart.getString("text");
                 text = text.replace("```json", "").replace("```", "").replace("\n", "").replace(" ", "");

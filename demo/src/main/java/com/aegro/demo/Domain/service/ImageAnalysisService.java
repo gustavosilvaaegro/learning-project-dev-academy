@@ -3,7 +3,7 @@ package com.aegro.demo.Domain.service;
 import com.aegro.demo.InterfaceAdpter.Entities.FileInfo;
 import com.aegro.demo.Domain.EntitiesModel.FormatResponse;
 import com.aegro.demo.InterfaceAdpter.Entities.Romaneio;
-import com.aegro.demo.InterfaceAdpter.Repository.RomaneioRepository;
+import com.aegro.demo.Domain.IRepository.RomaneioRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +35,9 @@ public class ImageAnalysisService extends Throwable {
                     System.err.println("Error parsing file " + file.getOriginalFilename() + ": " + e.getMessage());
                     //allAnalysisResult.add("Error parsing " + file.getOriginalFilename() + " file: " + e.getMessage());
                 }
-            } else {
+            } //else {
                //allAnalysisResult.add(file.getOriginalFilename() + " file is empty.");
-            }
+            //}
         }
 
         return allAnalysisResult;
