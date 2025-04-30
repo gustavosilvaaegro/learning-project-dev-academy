@@ -1,5 +1,6 @@
 package com.aegro.demo.InterfaceAdpter.controller;
 
+import com.aegro.demo.Domain.EntitiesModel.FileInfoModel;
 import com.aegro.demo.InterfaceAdpter.Entities.FileInfo;
 import com.aegro.demo.Domain.service.ImageAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,10 @@ public class UploadController {
     private ImageAnalysisService imageAnalysisService;
 
     @PostMapping("/upload")
-    public ResponseEntity<List<FileInfo>> handleFileUpload(@RequestParam("files")List<MultipartFile> files,
+    public ResponseEntity<List<FileInfoModel>> handleFileUpload(@RequestParam("files")List<MultipartFile> files,
                                                          @RequestParam("userEmail") String userEmail) {
         try {
-            List<FileInfo> analysisResults = imageAnalysisService.analyzeImages(files, userEmail);
+            List<FileInfoModel> analysisResults = imageAnalysisService.analyzeImages(files, userEmail);
             return ResponseEntity.ok(analysisResults);
         } catch (Exception e) {
             //return ResponseEntity.badRequest().body(List.of("Error processing files: " + e.getMessage()));

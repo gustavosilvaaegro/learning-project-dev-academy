@@ -20,11 +20,11 @@ public class FormatResponse extends Throwable{
         return new JSONObject(text);
     }
 
-    public FileInfo formatToFileInfo() throws JsonProcessingException {
+    public FileInfoModel formatToFileInfo() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String text = this.formatString();
-
-        return objectMapper.readValue(text, FileInfo.class);
+        System.out.println("Conteúdo do campo 'text':\n" + text);
+        return objectMapper.readValue(text, FileInfoModel.class);
     }
 
     private String formatString() {
@@ -43,7 +43,7 @@ public class FormatResponse extends Throwable{
                 JSONObject firstPart = parts.getJSONObject(0);
                 text = firstPart.getString("text");
                 text = text.replace("```json", "").replace("```", "").replace("\n", "").replace(" ", "");
-                System.out.println("Conteúdo do campo 'text':\n" + text);
+                //System.out.println("Conteúdo do campo 'text':\n" + text);
             }
         }
 

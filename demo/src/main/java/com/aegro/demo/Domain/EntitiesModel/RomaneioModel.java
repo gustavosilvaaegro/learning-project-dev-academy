@@ -14,14 +14,14 @@ public class RomaneioModel {
     private String id;
     private String userEmail;
     private String fileName;
-    private FileInfoModel fileInfo;
+    private FileInfoModel fileInfoModel;
 
     public Romaneio toEntity() {
         return new Romaneio(
                 this.id,
                 this.userEmail,
                 this.fileName,
-                this.fileInfo.toEntity()
+                this.fileInfoModel.toEntity()
         );
     }
 }

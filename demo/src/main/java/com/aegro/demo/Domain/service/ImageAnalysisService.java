@@ -1,9 +1,9 @@
 package com.aegro.demo.Domain.service;
 
-import com.aegro.demo.InterfaceAdpter.Entities.FileInfo;
+import com.aegro.demo.Domain.EntitiesModel.FileInfoModel;
+import com.aegro.demo.Domain.EntitiesModel.RomaneioModel;
 import com.aegro.demo.Domain.EntitiesModel.FormatResponse;
-import com.aegro.demo.InterfaceAdpter.Entities.Romaneio;
-import com.aegro.demo.Domain.IRepository.RomaneioRepository;
+import com.aegro.demo.InterfaceAdpter.Repository.Repository.RomaneioRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +22,14 @@ public class ImageAnalysisService extends Throwable {
     @Autowired
     private RomaneioRepository romaneioRepository;
 
-    public List<FileInfo> analyzeImages(List<MultipartFile> files, String userEmail) throws Exception{
+    public List<FileInfoModel> analyzeImages(List<MultipartFile> files, String userEmail) throws Exception{
 
-        List<FileInfo> allAnalysisResult = new ArrayList<>();
+        List<FileInfoModel> allAnalysisResult = new ArrayList<>();
 
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 try {
-                    FileInfo analysisResult = analyzeSingleImage(file, userEmail);
+                    FileInfoModel analysisResult = analyzeSingleImage(file, userEmail);
                     allAnalysisResult.add(analysisResult);
                 } catch (Exception e) {
                     System.err.println("Error parsing file " + file.getOriginalFilename() + ": " + e.getMessage());
@@ -43,19 +43,19 @@ public class ImageAnalysisService extends Throwable {
         return allAnalysisResult;
     }
 
-    private FileInfo analyzeSingleImage(MultipartFile file, String userEmail) throws IOException {
+    private FileInfoModel analyzeSingleImage(MultipartFile file, String userEmail) throws IOException {
 
         String geminiResponse = geminiApiService.processImage(file.getBytes());
         FormatResponse formatResponse = new FormatResponse(geminiResponse);
         JSONObject jsonResponse = formatResponse.formatToJson();
-        FileInfo fileInfoResponse = formatResponse.formatToFileInfo();
+        FileInfoModel fileInfoResponse = formatResponse.formatToFileInfo();
+        System.out.println(fileInfoResponse.toString());
 
-
-        Romaneio romaneio = new Romaneio();
-        romaneio.setUserEmail(userEmail);
-        romaneio.setFileName(file.getOriginalFilename());
-        romaneio.setFileInfo(fileInfoResponse);
-        romaneioRepository.save(romaneio);
+        RomaneioModel romaneioModel = new RomaneioModel();
+        romaneioModel.setUserEmail(userEmail);
+        romaneioModel.setFileName(file.getOriginalFilename());
+        romaneioModel.setFileInfoModel(fileInfoResponse);
+        romaneioRepository.save(romaneioModel);
 
         return fileInfoResponse;
     }
