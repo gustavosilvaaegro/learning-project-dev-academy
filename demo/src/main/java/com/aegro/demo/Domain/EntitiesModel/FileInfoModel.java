@@ -1,6 +1,6 @@
 package com.aegro.demo.Domain.EntitiesModel;
 
-import com.aegro.demo.InterfaceAdpter.Entities.FileInfo;
+import com.aegro.demo.InterfaceAdpter.Repository.Entities.FileInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;

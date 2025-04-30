@@ -1,6 +1,6 @@
 package com.aegro.demo.Domain.service;
 
-import com.aegro.demo.InterfaceAdpter.Entities.GeminiAPI;
+import com.aegro.demo.InterfaceAdpter.Repository.Entities.GeminiAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

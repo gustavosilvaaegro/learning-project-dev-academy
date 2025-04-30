@@ -1,4 +1,4 @@
-package com.aegro.demo.InterfaceAdpter.Entities;
+package com.aegro.demo.InterfaceAdpter.Repository.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

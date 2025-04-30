@@ -2,7 +2,7 @@ package com.aegro.demo.InterfaceAdpter.Repository.Repository;
 
 import com.aegro.demo.Domain.EntitiesModel.RomaneioModel;
 import com.aegro.demo.Domain.IRepository.InterfaceRomaneioRepository;
-import com.aegro.demo.InterfaceAdpter.Entities.Romaneio;
+import com.aegro.demo.InterfaceAdpter.Repository.Entities.Romaneio;
 import com.aegro.demo.InterfaceAdpter.Repository.InterfaceRepository.RomaneioRepositoryMongo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;

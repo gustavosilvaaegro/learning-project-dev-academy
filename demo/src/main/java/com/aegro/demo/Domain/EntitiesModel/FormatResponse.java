@@ -1,6 +1,5 @@
 package com.aegro.demo.Domain.EntitiesModel;
 
-import com.aegro.demo.InterfaceAdpter.Entities.FileInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
