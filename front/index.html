@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Imagens</title>
+</head>
+<body>
+    <h1>Selecione as Imagens para Análise</h1>
+    <input type="file" id="imageInput" multiple accept="image/*">
+    <label for="userEmail">Email do Usuário:</label>
+    <input type="string" id="userEmail" value="example@email.com">
+    <button onclick="uploadImages()">Enviar Imagens</button>
+    <div id="results"></div>
+
+    <script>
+        async function uploadImages() {
+            const fileInput = document.getElementById('imageInput');
+            const userEmailInput = document.getElementById('userEmail');
+            const resultsDiv = document.getElementById('results');
+            const files = fileInput.files;
+            const userEmail = userEmailInput.value;
+
+            if (files.length === 0) {
+                resultsDiv.innerText = 'Por favor, selecione ao menos uma imagem.';
+                return;
+            }
+
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]); // 'files' deve corresponder ao @RequestParam no backend
+            }
+            formData.append('userEmail', userEmail); // 'userEmail' deve corresponder ao @RequestParam no backend
+
+            try {
+                const response = await fetch('http://localhost:8080/api/images/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    resultsDiv.innerHTML = '<h3>Resultados da Análise:</h3>';
+                    if (Array.isArray(data)) {
+                        data.forEach((result, index) => {
+                            resultsDiv.innerHTML += `<p><strong>Imagem ${index + 1}:</strong> ${result}</p>`;
+                        });
+                    } else {
+                        resultsDiv.innerText = JSON.stringify(data); // Se o backend retornar um objeto
+                    }
+                } else {
+                    const error = await response.text();
+                    resultsDiv.innerText = `Erro no upload: ${error}`;
+                }
+            } catch (error) {
+                resultsDiv.innerText = `Erro de rede: ${error}`;
+            }
+        }
+    </script>
+</body>
+</html>
