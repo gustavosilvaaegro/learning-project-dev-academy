@@ -41,7 +41,7 @@ public class FormatResponse extends Throwable{
             if (!parts.isEmpty()) {
                 JSONObject firstPart = parts.getJSONObject(0);
                 text = firstPart.getString("text");
-                text = text.replace("```json", "").replace("```", "").replace("\n", "").replace(" ", "");
+                text = text.replace("```json", "").replace("```", "").replace("\n", "");
                 //System.out.println("Conteúdo do campo 'text':\n" + text);
             }
         }

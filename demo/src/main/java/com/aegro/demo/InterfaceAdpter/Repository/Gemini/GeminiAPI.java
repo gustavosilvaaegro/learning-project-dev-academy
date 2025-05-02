@@ -1,4 +1,4 @@
-package com.aegro.demo.InterfaceAdpter.Repository.Entities;
+package com.aegro.demo.InterfaceAdpter.Repository.Gemini;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;

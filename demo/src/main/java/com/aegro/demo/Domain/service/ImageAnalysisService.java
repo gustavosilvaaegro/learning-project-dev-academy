@@ -22,14 +22,14 @@ public class ImageAnalysisService extends Throwable {
     @Autowired
     private RomaneioRepository romaneioRepository;
 
-    public List<FileInfoModel> analyzeImages(List<MultipartFile> files, String userEmail) throws Exception{
+    public List<RomaneioModel> analyzeImages(List<MultipartFile> files, String userEmail) throws Exception{
 
-        List<FileInfoModel> allAnalysisResult = new ArrayList<>();
+        List<RomaneioModel> allAnalysisResult = new ArrayList<>();
 
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 try {
-                    FileInfoModel analysisResult = analyzeSingleImage(file, userEmail);
+                    RomaneioModel analysisResult = analyzeSingleImage(file, userEmail);
                     allAnalysisResult.add(analysisResult);
                 } catch (Exception e) {
                     System.err.println("Error parsing file " + file.getOriginalFilename() + ": " + e.getMessage());
@@ -43,7 +43,7 @@ public class ImageAnalysisService extends Throwable {
         return allAnalysisResult;
     }
 
-    private FileInfoModel analyzeSingleImage(MultipartFile file, String userEmail) throws IOException {
+    private RomaneioModel analyzeSingleImage(MultipartFile file, String userEmail) throws IOException {
 
         String geminiResponse = geminiApiService.processImage(file.getBytes());
         FormatResponse formatResponse = new FormatResponse(geminiResponse);
@@ -57,7 +57,7 @@ public class ImageAnalysisService extends Throwable {
         romaneioModel.setFileInfoModel(fileInfoResponse);
         romaneioRepository.save(romaneioModel);
 
-        return fileInfoResponse;
+        return romaneioModel;
     }
 
 }
