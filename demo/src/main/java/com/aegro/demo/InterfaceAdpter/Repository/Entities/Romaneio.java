@@ -1,5 +1,6 @@
 package com.aegro.demo.InterfaceAdpter.Repository.Entities;
 
+import com.aegro.demo.Domain.EntitiesModel.RomaneioModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

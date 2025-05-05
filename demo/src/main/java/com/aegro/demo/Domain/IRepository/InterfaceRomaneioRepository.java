@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface InterfaceRomaneioRepository {
     void save(RomaneioModel romaneioModel);
-    Optional<Romaneio> findByUserEmail(String email);
-    List<Romaneio> findAllByUserEmail(String email);
+    List<RomaneioModel> findAllByUserEmail(String email);
+    List<RomaneioModel> findAll();
     Romaneio findById(String id);
 }

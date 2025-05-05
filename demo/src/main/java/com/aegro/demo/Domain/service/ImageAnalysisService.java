@@ -3,6 +3,7 @@ package com.aegro.demo.Domain.service;
 import com.aegro.demo.Domain.EntitiesModel.FileInfoModel;
 import com.aegro.demo.Domain.EntitiesModel.RomaneioModel;
 import com.aegro.demo.Domain.EntitiesModel.FormatResponse;
+import com.aegro.demo.InterfaceAdpter.Repository.Entities.Romaneio;
 import com.aegro.demo.InterfaceAdpter.Repository.Repository.RomaneioRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -56,4 +58,12 @@ public class ImageAnalysisService extends Throwable {
         return romaneioModel;
     }
 
+    public List<RomaneioModel> findAll() {
+        return romaneioRepository.findAll();
+
+    }
+
+    public List<RomaneioModel> findAllByUserEmail(String userEmail) {
+        return romaneioRepository.findAllByUserEmail(userEmail);
+    }
 }

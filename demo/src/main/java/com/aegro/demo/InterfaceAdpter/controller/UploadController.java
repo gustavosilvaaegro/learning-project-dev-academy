@@ -29,4 +29,16 @@ public class UploadController {
             return ResponseEntity.badRequest().body(List.of());
         }
     }
+
+    @GetMapping("/files")
+    public ResponseEntity<List<RomaneioDTO>> findAllFiles() {
+        List<RomaneioDTO> allFiles = imageAnalysisService.findAll();
+        return ResponseEntity.ok(allFiles);
+    }
+
+    @GetMapping("/files/email")
+    public ResponseEntity<List<RomaneioDTO>> findeAllByUserEmail(@RequestParam("userEmail") String userEmail) {
+        List<RomaneioDTO> allFilesByUserEmail = imageAnalysisService.findAllByUserEmail(userEmail);
+        return ResponseEntity.ok(allFilesByUserEmail);
+    }
 }
