@@ -33,11 +33,8 @@ public class ImageAnalysisService extends Throwable {
                     allAnalysisResult.add(analysisResult);
                 } catch (Exception e) {
                     System.err.println("Error parsing file " + file.getOriginalFilename() + ": " + e.getMessage());
-                    //allAnalysisResult.add("Error parsing " + file.getOriginalFilename() + " file: " + e.getMessage());
                 }
-            } //else {
-               //allAnalysisResult.add(file.getOriginalFilename() + " file is empty.");
-            //}
+            }
         }
 
         return allAnalysisResult;
@@ -47,14 +44,13 @@ public class ImageAnalysisService extends Throwable {
 
         String geminiResponse = geminiApiService.processImage(file.getBytes());
         FormatResponse formatResponse = new FormatResponse(geminiResponse);
-        JSONObject jsonResponse = formatResponse.formatToJson();
         FileInfoModel fileInfoResponse = formatResponse.formatToFileInfo();
-        System.out.println(fileInfoResponse.toString());
 
         RomaneioModel romaneioModel = new RomaneioModel();
         romaneioModel.setUserEmail(userEmail);
         romaneioModel.setFileName(file.getOriginalFilename());
         romaneioModel.setFileInfoModel(fileInfoResponse);
+
         romaneioRepository.save(romaneioModel);
 
         return romaneioModel;

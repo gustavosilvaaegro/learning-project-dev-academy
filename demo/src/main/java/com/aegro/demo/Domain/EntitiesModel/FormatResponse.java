@@ -14,36 +14,47 @@ public class FormatResponse extends Throwable{
     }
 
     public JSONObject formatToJson() {
-        String text = this.formatString();
-
+        String text = this.separateResponse();
         return new JSONObject(text);
     }
 
     public FileInfoModel formatToFileInfo() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String text = this.formatString();
-        System.out.println("Conteúdo do campo 'text':\n" + text);
+        String text = this.separateResponse();
+        //System.out.println("Conteúdo do campo 'text':\n" + text);
         return objectMapper.readValue(text, FileInfoModel.class);
     }
 
-    private String formatString() {
+    private String separateResponse() {
         JSONObject jsonObject = new JSONObject(this.response);
         JSONArray candidates = jsonObject.getJSONArray("candidates");
+        JSONArray parts;
         String text = "";
 
+        parts = separateParts(candidates);
+        text = separateFirstPart(parts);
 
+        return text;
+    }
+
+    private JSONArray separateParts(JSONArray candidates) {
         if (!candidates.isEmpty()) {
             JSONObject firstCandidate = candidates.getJSONObject(0);
             JSONObject content = firstCandidate.getJSONObject("content");
-            JSONArray parts = content.getJSONArray("parts");
+            return content.getJSONArray("parts");
+        }
 
+        return new JSONArray();
+    }
 
-            if (!parts.isEmpty()) {
-                JSONObject firstPart = parts.getJSONObject(0);
-                text = firstPart.getString("text");
-                text = text.replace("```json", "").replace("```", "").replace("\n", "");
-                //System.out.println("Conteúdo do campo 'text':\n" + text);
-            }
+    private String separateFirstPart(JSONArray parts) {
+
+        String text = "";
+
+        if (!parts.isEmpty()) {
+            JSONObject firstPart = parts.getJSONObject(0);
+            text = firstPart.getString("text");
+            text = text.replace("```json", "").replace("```", "").replace("\n", "");
         }
 
         return text;
