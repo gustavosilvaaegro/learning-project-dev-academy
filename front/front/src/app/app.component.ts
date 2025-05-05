@@ -23,6 +23,7 @@ export class AppComponent {
   tableData: TableData[] = [];
   tableHeaders: string[] = [];
   imageFile: File | null = null;
+  loading: boolean = false;
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -66,11 +67,12 @@ export class AppComponent {
     if (!files || files.length === 0) {
         return;
     } 
-
     if (!userEmail) {
         alert('Por favor, insira seu e-mail.');
         return;
     }
+
+    this.loading = true;
     const formData = this.createFormData(files, userEmail);
 
     try {
@@ -89,8 +91,11 @@ export class AppComponent {
       console.error('Erro ao fazer o upload da imagem:', error);
         
     }
+    this.loading = false;
   }
-  
+  async getEmailData(){
+    console.log(this.email);
+  }
   private createFormData(files: FileList, userEmail: string): FormData {
     const formData = new FormData();
     Array.from(files).forEach(file => formData.append('files', file));
@@ -147,11 +152,12 @@ export class AppComponent {
             filesNotPresent.push(files[i].name);
         }
     }
-
+    if (filesNotPresent.length === 0) {
+        return;
+    }
     for (let i = 0; i < filesNotPresent.length; i++) {
         msg += `\n-${filesNotPresent[i]}`;
     }
-
     alert(msg);
   }
 

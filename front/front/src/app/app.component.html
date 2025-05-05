@@ -1,7 +1,7 @@
 <main>
   <div class="container">
     <div class="upload-section">
-      <h2>Algo Romaneio</h2>
+      <h2>Mini App para extração de dados de Romaneio</h2>
       <input 
         type="email" 
         [(ngModel)]="email" 
@@ -41,7 +41,18 @@
         Enviar imagem
       </button>
       <div id = "results">
-
+        @if (loading) {
+          <p>Carregando...</p>
+        }
+      </div>
+      <div class="emailDataViewer">
+        <button 
+          class="button data-button"
+          (click)="getEmailData()"
+          [disabled]="!email">
+          
+          Solicitar dados
+        </button>
       </div>
     </div>
 
