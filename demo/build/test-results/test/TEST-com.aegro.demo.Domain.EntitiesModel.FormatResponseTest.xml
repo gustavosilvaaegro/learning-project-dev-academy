@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aegro.demo.Domain.EntitiesModel.FormatResponseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-06T10:44:18.840Z" hostname="WS-AEGRO-463" time="0.177">
+  <properties/>
+  <testcase name="formatToFileInfo()" classname="com.aegro.demo.Domain.EntitiesModel.FormatResponseTest" time="0.177"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
