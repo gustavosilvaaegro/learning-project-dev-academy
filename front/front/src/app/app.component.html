@@ -1,0 +1,98 @@
+<main>
+  <div class="container">
+    <div class="upload-section">
+      <h2 id="title-app">Mini App para extração de dados de Romaneio</h2>
+      <input 
+        type="email" 
+        [(ngModel)]="email" 
+        placeholder="exemplo@email.com" 
+        class="email-input"
+        id = "userEmail"
+      >
+      
+      <div 
+        class="image-drop-zone"
+        (dragover)="onDragOver($event)"
+        (drop)="onDrop($event)"
+        (click)="fileInput.click()"
+      >
+        <input 
+          #fileInput
+          type="file"
+          (change)="onFileSelected($event)"
+          style="display: none"
+          accept="image/*"
+          id = "imageInput"
+          multiple
+        >
+        @if (selectedImage){
+          <img [src]="selectedImage" style="max-width: 100%; max-height: 180px;">
+        }
+        @else{
+          <span>Coloque a imagem aqui ou clique para fazer o upload</span>
+        }
+      </div>
+
+      <button 
+        class="button upload-button"
+        (click)="uploadImage()"
+        [disabled]="!selectedImage || !email"
+      >
+        Enviar imagem
+      </button>
+      <div id = "results">
+        @if (loading) {
+          <p>Carregando...</p>
+        }
+      </div>
+      <div class="email-data">
+        <div class="email-data-info">
+          <p id="email-text">Já utilizou o serviço? Clique no botão abaixo para buscar os dados do email cadastrado</p>
+        </div>
+        <button 
+          class="button data-button"
+          (click)="getEmailData()"
+          [disabled]="!email">
+
+          Solicitar dados
+        </button>
+      </div>
+    </div>
+
+  <div class="table-section">
+      @if (tableData.length > 0) {
+        <div class ="table-container">
+          <div class="table-c2">
+            <table >
+              <thead>
+                <tr>
+                  @for (header of tableHeaders; track header) {
+                    <th>{{ header }}</th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of tableData; track row) {
+                  <tr>
+                    @for (header of tableHeaders; track header) {
+                      <td>{{ row[header] }}</td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+        </div>
+      </div>
+      }
+        @if (tableData.length > 0){
+          <button 
+            class="button export-button"
+            (click)="exportToExcel()"
+          >
+            Baixar arquivo
+          </button>
+        
+      }
+    </div>
+  </div>
+</main>
