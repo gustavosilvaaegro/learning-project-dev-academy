@@ -58,12 +58,5 @@ public class ImageAnalysisService extends Throwable {
         return romaneioModel;
     }
 
-    public List<RomaneioModel> findAll() {
-        return romaneioRepository.findAll();
 
-    }
-
-    public List<RomaneioModel> findAllByUserEmail(String userEmail) {
-        return romaneioRepository.findAllByUserEmail(userEmail);
-    }
 }

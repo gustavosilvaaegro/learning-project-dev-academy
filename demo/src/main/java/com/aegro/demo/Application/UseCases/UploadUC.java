@@ -25,17 +25,4 @@ public class UploadUC {
                 .toList();
     }
 
-    public List<RomaneioDTO> findAll() {
-        return imageAnalysisService.findAll()
-                .stream()
-                .map(RomaneioMapper::toDTO)
-                .toList();
-    }
-
-    public List<RomaneioDTO> findAllByUserEmail(String userEmail) {
-        return imageAnalysisService.findAllByUserEmail(userEmail)
-                .stream()
-                .map(RomaneioMapper::toDTO)
-                .toList();
-    }
 }
