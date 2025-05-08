@@ -42,8 +42,7 @@ public class GeminiAPI extends Throwable {
     private final String escapedPrompt = prompt.replace("\n", "").replace("\"", "\\\"");
 
     public GeminiAPI() {
-        //this.apiKey = System.getenv("GEMINI_API_KEY");
-        this.apiKey = "AIzaSyDQaDcWERdclbyzXzdu8uiW3eXJu4wZYik";
+        this.apiKey = System.getenv("GEMINI_API_KEY");
         this.apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
         this.restTemplate = new RestTemplate();
         if (this.apiKey == null) {
